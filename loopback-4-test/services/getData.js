@@ -1,7 +1,7 @@
-"use strict";
 const fs = require('fs');
 const iconv = require('iconv-lite');
 const csv = require('csv-parser');
+
 module.exports = function getDataFoo() {
     let results = [];
     fs.readFile('1.csv', null, function read(err, data) {
@@ -20,4 +20,3 @@ module.exports = function getDataFoo() {
         });
     });
 };
-//# sourceMappingURL=getData.js.map
