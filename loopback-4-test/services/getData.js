@@ -3,7 +3,7 @@ const iconv = require('iconv-lite');
 const csv = require('csv-parser');
 
 module.exports = function getDataFoo() {
-    let results = [];
+    let waybillsList = [];
     fs.readFile('1.csv', null, function read(err, data) {
         if (err) {
             throw err;
@@ -14,8 +14,7 @@ module.exports = function getDataFoo() {
                 .pipe(csv({ separator: ';', headers: ["id", "shipId", "departurePlace", "crew", "passangers"] }))
                 .on('data', (data) => results.push(data))
                 .on('end', () => {
-                console.log(results);
-                return results;
+                return waybillsList;
             });
         });
     });
