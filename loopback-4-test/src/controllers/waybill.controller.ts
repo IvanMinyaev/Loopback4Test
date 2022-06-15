@@ -29,7 +29,7 @@ export class WaybillController {
   @get('/waybills')
   @response(200, {
     description: 'Array of Waybill model instances',
-    content: {
+    content: {  
       'application/json': {
         schema: {
           type: 'array',
@@ -41,11 +41,6 @@ export class WaybillController {
   async find(
     @param.filter(Waybill) filter?: Filter<Waybill>,
   ): Promise<Waybill[]> {
-    //
-    const test = await this.waybillRepository.find();
-    console.log(test);
-    //
-    
     return this.waybillRepository.find(filter);
   }
 
@@ -105,52 +100,3 @@ export class WaybillController {
     await this.waybillRepository.deleteById(id);
   }
 }
-
-  // @patch('/waybills/{id}')
-  // @response(204, {
-  //   description: 'Waybill PATCH success',
-  // })
-  // async updateById(
-  //   @param.path.number('id') id: number,
-  //   @requestBody({
-  //     content: {
-  //       'application/json': {
-  //         schema: getModelSchemaRef(Waybill, {partial: true}),
-  //       },
-  //     },
-  //   })
-  //   waybill: Waybill,
-  // ): Promise<void> {
-  //   await this.waybillRepository.updateById(id, waybill);
-  // }
-
-
-  // @get('/waybills/count')
-  // @response(200, {
-  //   description: 'Waybill model count',
-  //   content: {'application/json': {schema: CountSchema}},
-  // })
-  // async count(
-  //   @param.where(Waybill) where?: Where<Waybill>,
-  // ): Promise<Count> {
-  //   return this.waybillRepository.count(where);
-  // }
-
-  // @patch('/waybills')
-  // @response(200, {
-  //   description: 'Waybill PATCH success count',
-  //   content: {'application/json': {schema: CountSchema}},
-  // })
-  // async updateAll(
-  //   @requestBody({
-  //     content: {
-  //       'application/json': {
-  //         schema: getModelSchemaRef(Waybill, {partial: true}),
-  //       },
-  //     },
-  //   })
-  //   waybill: Waybill,
-  //   @param.where(Waybill) where?: Where<Waybill>,
-  // ): Promise<Count> {
-  //   return this.waybillRepository.updateAll(waybill, where);
-  // }

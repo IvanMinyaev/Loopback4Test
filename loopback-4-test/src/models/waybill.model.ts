@@ -1,6 +1,6 @@
-import {Entity, model, property} from '@loopback/repository';
+import { Entity, model, property } from '@loopback/repository';
 
-@model({settings: {strict: true}})
+@model({ settings: { strict: true } })
 export class Waybill extends Entity {
   @property({
     type: 'number',
@@ -9,6 +9,31 @@ export class Waybill extends Entity {
     required: true,
   })
   id: number;
+
+  @property({
+    type: 'Date',
+  })
+  createdDate: Date;
+
+  @property({
+    type: 'number',
+  })
+  incomingNumber: number;
+
+  @property({
+    type: 'number',
+  })
+  outgoingNumber: number;
+
+  @property({
+    type: 'string',
+  })
+  applicantStatus: string;
+
+  @property({
+    type: 'number',
+  })
+  applicantId: number;
 
   @property({
     type: 'number',
@@ -22,6 +47,11 @@ export class Waybill extends Entity {
   departurePlace?: string;
 
   @property({
+    type: 'string',
+  })
+  destinationPlace: string; 
+
+  @property({
     type: 'number',
   })
   crew?: number;
@@ -29,7 +59,12 @@ export class Waybill extends Entity {
   @property({
     type: 'number',
   })
-  passangers?: number;
+  passengers?: number;
+
+  @property({
+    type: 'number',
+  })
+  weight?: number;
 
   // Define well-known properties here
 
@@ -47,3 +82,44 @@ export interface WaybillRelations {
 }
 
 export type WaybillWithRelations = Waybill & WaybillRelations;
+
+// {
+//   "1": {
+//     "id": 1,
+//     "createDate": "2022-05-26T09:21:25.391Z",
+//     "reviewPeriod": null,
+//     "incomingNumber": "100-90",
+//     "outgoingNumber": "2-х",
+//     "applicantStatus": 0,
+//     "applicantId": 3,
+//     "shipId": 1,
+//     "departurePlace": "Мурманск",
+//     "departureLon": 30,
+//     "departureLat": 33,
+//     "destinationPlace": "Сабетта-1",
+//     "destinationLon": 73,
+//     "destinationLat": 73,
+//     "routeDescription": "через КВ",
+//     "etaNsr": "2022-04-20T00:00:00.000Z",
+//     "etdNsr": "2022-05-20T00:00:00.000Z",
+//     "crew": 10,
+//     "passangers": 0,
+//     "shipOwnerName": null,
+//     "towedObject": "-",
+//     "cargoTypeId": null,
+//     "hazardClassId": null,
+//     "weight": null,
+//     "weightDangerous": null,
+//     "shipName": "ARKTIKA",
+//     "imo": "9694725",
+//     "registerNumber": "130238",
+//     "applicantName": "Совкомфлот",
+//     "statusName": "Новое",
+//     "statusNameEn": "New",
+//     "sendDate": "2022-04-10T00:00:00.000Z",
+//     "userId": 1,
+//     "isCurrentUserOwner": 1,
+//     "acceptDate": null,
+//     "endDate": null,
+//     "rejectDate": null
+//   },

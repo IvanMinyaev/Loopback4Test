@@ -1,15 +1,16 @@
-import {inject, lifeCycleObserver, LifeCycleObserver} from '@loopback/core';
-import {juggler} from '@loopback/repository';
+import { inject, lifeCycleObserver, LifeCycleObserver } from '@loopback/core';
+import { juggler } from '@loopback/repository';
 
 const config = {
-  name: 'db',
+  name: 'd398b4gfa6p61a',
   connector: 'postgresql',
   url: '',
-  host: 'localhost',
+  host: 'ec2-34-248-169-69.eu-west-1.compute.amazonaws.com',
   port: 5432,
-  user: 'postgres',
-  password: 'postgres',
-  database: 'waybills',
+  user: 'teofuzyxcgjurn',
+  password: 'be80005311da595272c35d7cc930780e48f98965477ac88e7e20011d4c1cd2b7',
+  database: 'd398b4gfa6p61a',
+  ssl: { rejectUnauthorized: false },
   debug: true
 };
 
@@ -24,7 +25,7 @@ export class DbDataSource extends juggler.DataSource
   static readonly defaultConfig = config;
 
   constructor(
-    @inject('datasources.config.db', {optional: true})
+    @inject('datasources.config.db', { optional: true })
     dsConfig: object = config,
   ) {
     super(dsConfig);
