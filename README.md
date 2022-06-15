@@ -1,7 +1,7 @@
 # Loopback4Test
 
 
-База данных (PostgreSQL, SequelizeORM) с тестовыми записями по примеру, развернута на Heroku
+База данных (PostgreSQL ) с тестовыми записями по примеру, развернута на Heroku
 
 - Копируем проект
 - npm i 
