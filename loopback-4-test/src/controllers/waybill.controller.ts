@@ -41,6 +41,11 @@ export class WaybillController {
   async find(
     @param.filter(Waybill) filter?: Filter<Waybill>,
   ): Promise<Waybill[]> {
+    //
+    const test = await this.waybillRepository.find();
+    console.log(test);
+    //
+    
     return this.waybillRepository.find(filter);
   }
 
