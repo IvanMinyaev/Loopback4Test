@@ -17,31 +17,38 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {Waybill} from '../models';
-import {WaybillRepository} from '../repositories';
+import { Waybill } from '../models';
+import { WaybillRepository } from '../repositories';
 
 export class WaybillController {
   constructor(
     @repository(WaybillRepository)
-    public waybillRepository : WaybillRepository,
-  ) {}
+    public waybillRepository: WaybillRepository,
+  ) { }
 
   @get('/waybills')
   @response(200, {
     description: 'Array of Waybill model instances',
-    content: {  
+    content: {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(Waybill, {includeRelations: true}),
+          items: getModelSchemaRef(Waybill, { includeRelations: true }),
         },
       },
     },
   })
   async find(
     @param.filter(Waybill) filter?: Filter<Waybill>,
-  ): Promise<Waybill[]> {
-    return this.waybillRepository.find(filter);
+  ): Promise<Record<string, Waybill>> {
+    const waybillsList = await this.waybillRepository.find()
+
+    const formattedList = waybillsList.reduce<Record<string, Waybill>>((acc: { [x: string]: any; }, el: { id: string | number; }) => {
+      acc[el.id] = el;
+      return acc;
+    }, {});
+
+    return formattedList;
   }
 
   @get('/waybills/{id}')
@@ -49,13 +56,13 @@ export class WaybillController {
     description: 'Waybill model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(Waybill, {includeRelations: true}),
+        schema: getModelSchemaRef(Waybill, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.number('id') id: number,
-    @param.filter(Waybill, {exclude: 'where'}) filter?: FilterExcludingWhere<Waybill>
+    @param.filter(Waybill, { exclude: 'where' }) filter?: FilterExcludingWhere<Waybill>
   ): Promise<Waybill> {
     return this.waybillRepository.findById(id, filter);
   }
@@ -63,7 +70,7 @@ export class WaybillController {
   @post('/waybills')
   @response(200, {
     description: 'Waybill model instance',
-    content: {'application/json': {schema: getModelSchemaRef(Waybill)}},
+    content: { 'application/json': { schema: getModelSchemaRef(Waybill) } },
   })
   async create(
     @requestBody({
@@ -71,7 +78,7 @@ export class WaybillController {
         'application/json': {
           schema: getModelSchemaRef(Waybill, {
             title: 'NewWaybill',
-            
+
           }),
         },
       },
