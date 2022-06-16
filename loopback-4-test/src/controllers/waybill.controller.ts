@@ -1,3 +1,4 @@
+import { compareByOrder, filterByKey } from '@loopback/core';
 import {
   Count,
   CountSchema,
@@ -41,10 +42,10 @@ export class WaybillController {
   async find(
     @param.filter(Waybill) filter?: Filter<Waybill>,
   ): Promise<Record<string, Waybill>> {
-    const waybillsList = await this.waybillRepository.find()
+    const waybillsList = await this.waybillRepository.find({ order: ['id DESC'] });
 
     const formattedList = waybillsList.reduce<Record<string, Waybill>>((acc: { [x: string]: any; }, el: { id: string | number; }) => {
-      acc[el.id] = el;
+      acc[`_${el.id}_`] = el;
       return acc;
     }, {});
 

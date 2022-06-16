@@ -65,7 +65,6 @@ export class Waybill extends Entity {
     type: 'number',
   })
   weight?: number;
-
   // Define well-known properties here
 
   // Indexer property to allow additional data
